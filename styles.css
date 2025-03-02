@@ -49,3 +49,12 @@ button:hover {
 button:active {
     background: #bbb;
 }
+#historial {
+    background: #f4f4f4;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    min-height: 50px;
+    font-family: monospace;
+    white-space: pre-line;
+}

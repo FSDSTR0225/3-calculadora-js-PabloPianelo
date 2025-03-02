@@ -1,9 +1,8 @@
-
-
-
 let dato = [];
 let result = null;
 let operador = null;
+operacionTexto=null;
+
 
 const input = document.getElementById("display");
 const bNumber = document.querySelectorAll(".number");
@@ -11,6 +10,8 @@ const bOperador = document.querySelectorAll(".operator");
 const bDecimal = document.querySelector(".decimal");
 const bClear = document.querySelector(".clear");
 const bIgual = document.querySelector(".resolve");
+
+
 bNumber.forEach(boton => {
     boton.addEventListener("click", () => {
       input.value += boton.innerText;
@@ -28,10 +29,11 @@ bNumber.forEach(boton => {
 
 
   bDecimal.addEventListener("click", () => {
-    if (!input.value.includes('.')) {
+    if (!input.value.includes('.')&& input.value !== "" ) {
         input.value += '.';
     }
 });
+
 
   function guardar() {
     console.log("Guardar", input.value);
@@ -66,13 +68,17 @@ bNumber.forEach(boton => {
     operador = null;
     dato = [];
     result = null;
+    operacionTexto=null;
+    document.getElementById("historial").innerText = "";
   })
 
 
   function igual() {
     guardar();  
     if (dato.length >= 2) {  // Si hay al menos dos números en el array
-        operation(operador);
+       operacionTexto = dato.join(" " + operador + " ") + " = ";
+      document.getElementById("historial").innerText += operacionTexto + "\n";  // Agrega la operación al historial  
+      operation(operador);
         input.value = result;  // Muestra el resultado en la pantalla
         dato = [result];  // Guarda el resultado como base para una nueva operación
         operador = null;  // Reinicia el operador
@@ -80,8 +86,6 @@ bNumber.forEach(boton => {
   }
 
   bIgual.addEventListener("click", () => {
-   
-  
    igual();
   });
 
